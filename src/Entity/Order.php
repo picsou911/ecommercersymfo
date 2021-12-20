@@ -27,7 +27,7 @@ class Order
     private $user;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $createAt;
 
@@ -55,6 +55,14 @@ class Order
      * @ORM\Column(type="boolean")
      */
     private $isPaid;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reference;
+
+
+
 
     public function __construct()
     {
@@ -87,12 +95,12 @@ class Order
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeImmutable
+    public function getCreateAt(): ?\DateTime
     {
         return $this->createAt;
     }
 
-    public function setCreateAt(\DateTimeImmutable $createAt): self
+    public function setCreateAt(\DateTime $createAt): self
     {
         $this->createAt = $createAt;
 
@@ -176,4 +184,18 @@ class Order
 
         return $this;
     }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+
 }

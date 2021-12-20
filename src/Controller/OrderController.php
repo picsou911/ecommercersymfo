@@ -28,7 +28,7 @@ class OrderController extends AbstractController
     {
         if (!$this->getUser()->getAddresses()->getValues())
         {
-            return $this->redirectToRoute('account_address_add');
+            return $this->redirectToRoute('account_address');
         }
 
         $form = $this->createForm(OrderType::class, null, [
@@ -45,7 +45,7 @@ class OrderController extends AbstractController
     /**
      * @Route("/commande/recapitulatif", name="order_recap", methods={"POST"})
      */
-    public function add(Cart $cart, Request $request): Response
+    public function add(Cart $cart, Request $request)
     {
         $form = $this->createForm(OrderType::class, null, [
             'user' => $this->getUser()
@@ -54,7 +54,8 @@ class OrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $date = new \DateTimeImmutable();
+            $date = new \DateTime();
+
             $carriers = $form->get('carriers')->getData();
             $delivery = $form->get('addresses')->getData();
             $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
@@ -71,6 +72,8 @@ class OrderController extends AbstractController
 
             // Enregistrer ma commande Order()
             $order = new Order();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCreateAt($date);
             $order->setCarrierName($carriers->getName());
@@ -93,13 +96,15 @@ class OrderController extends AbstractController
                 $this->entityManager->persist($orderDetails);
             }
 
-            //$this->entityManager->flush();
+
+
+            $this->entityManager->flush();
 
             return $this->render('order/add.html.twig', [
                 'cart' => $cart->getFull(),
                 'carrier' => $carriers,
-                'delivery' => $delivery_content
-
+                'delivery' => $delivery_content,
+                'reference' => $order->getReference()
             ]);
         }
 
