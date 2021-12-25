@@ -47,8 +47,7 @@ class RegisterController extends AbstractController
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
-                $mail = new Mail();
-                $mail->send($user->getEmail());
+
 
                 $notification = "Votre inscription s'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.";
             } else {
