@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\ReserPassword;
+use App\Entity\ResetPassword;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ReserPassword|null find($id, $lockMode = null, $lockVersion = null)
- * @method ReserPassword|null findOneBy(array $criteria, array $orderBy = null)
- * @method ReserPassword[]    findAll()
- * @method ReserPassword[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ResetPassword|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ResetPassword|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ResetPassword[]    findAll()
+ * @method ResetPassword[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ReserPasswordRepository extends ServiceEntityRepository
+class ResetPasswordRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ReserPassword::class);
+        parent::__construct($registry, ResetPassword::class);
     }
 
     // /**

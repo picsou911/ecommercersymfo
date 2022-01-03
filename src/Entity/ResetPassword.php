@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ReserPasswordRepository;
+use App\Repository\ResetPasswordRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ReserPasswordRepository::class)
+ * @ORM\Entity(repositoryClass=ResetPasswordRepository::class)
  */
-class ReserPassword
+class ResetPassword
 {
     /**
      * @ORM\Id
@@ -18,7 +18,7 @@ class ReserPassword
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class)
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
